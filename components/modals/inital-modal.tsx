@@ -51,7 +51,9 @@ export const InitialModal = () => {
       form.reset();
       router.refresh();
       window.location.reload();
-    } catch (e) {}
+    } catch (e) {
+      console.error("unable to fetch server", e);
+    }
   };
   if (!isMounted) {
     return null;
