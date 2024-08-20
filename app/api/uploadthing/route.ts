@@ -1,19 +1,11 @@
-import { auth } from "@clerk/nextjs/server";
+import { createRouteHandler } from "uploadthing/next";
 
-import { createUploadthing, type FileRouter } from "uploadthing/next";
-import { UploadThingError } from "uploadthing/server";
+import { ourFileRouter } from "./core";
 
-const f = createUploadthing();
+// Export routes for Next App Router
+export const { GET, POST } = createRouteHandler({
+  router: ourFileRouter,
 
-const handleAuth = () => {
-  const userId = auth();
-  if (!userId) {
-    throw new Error("Unauthorized");
-    return { userId: userId };
-  }
-}; // Fake auth function
-
-// FileRouter for your app, can contain multiple FileRoutes
-export const ourFileRouter = {} satisfies FileRouter;
-
-export type OurFileRouter = typeof ourFileRouter;
+  // Apply an (optional) custom config:
+  // config: { ... },
+});
