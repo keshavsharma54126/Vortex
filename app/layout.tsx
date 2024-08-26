@@ -8,9 +8,10 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
-import { ThemeProvider } from "@/components/ui/providers/theme-provider";
+import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ModeToggle } from "./mode-toggle";
 import { cn } from "@/lib/utils";
+import { ModalProvider } from "@/components/providers/modal-provider";
 
 const font = Open_Sans({ subsets: ["latin"] });
 
@@ -33,15 +34,8 @@ export default function RootLayout({
             defaultTheme="dark"
             enableSystem={true}
             storageKey="discord-theme">
-            <div className="flex justify-end">
-              <header>
-                <ModeToggle />
-                <SignedIn>
-                  <UserButton />
-                </SignedIn>
-              </header>
-            </div>
-            <main>{children}</main>
+            <ModalProvider />
+            {children}
           </ThemeProvider>
         </body>
       </html>
